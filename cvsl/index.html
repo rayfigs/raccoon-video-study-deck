@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!-- Meta Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","637177527161861");fbq("track","PageView");</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=637177527161861&ev=PageView&noscript=1"/></noscript><!-- End Meta Pixel Code -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caption VSL — Short videos that stop the scroll</title>
+<meta name="description" content="Word-by-word captioned VSLs in 2-5 min per video. Real-sounding AI voice. No footage required. Built for cold-traffic creative at scale.">
+<meta property="og:title" content="Caption VSL — Short videos that stop the scroll">
+<meta property="og:description" content="Word-by-word captioned VSLs in 2-5 min per video. Real-sounding AI voice. No footage required.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://prep.reinaldofigueroa.com/captionedvsl1pager">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0E1014;
+  --bg2:#161821;
+  --card:#1C1F2A;
+  --card2:#252938;
+  --bdr:rgba(208,161,105,0.10);
+  --bdr-strong:rgba(208,161,105,0.22);
+  --t1:#FFFFFF;
+  --t2:#C9CDD7;
+  --t3:#8A8F9C;
+  --copper:#D0A169;
+  --copper-d:rgba(208,161,105,0.12);
+  --copper-g:rgba(208,161,105,0.06);
+  --green:#6BBE45;
+  --red:#E74C3C;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--t1);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+  font-size:17px;
+  overflow-x:hidden;
+}
+a{color:var(--copper);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.wm{
+  position:fixed;
+  bottom:1rem;
+  right:1.25rem;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;
+  font-weight:500;
+  color:var(--copper);
+  opacity:.6;
+  letter-spacing:1px;
+  z-index:50;
+  pointer-events:none;
+}
+
+.bg-glow{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% -10%, rgba(208,161,105,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 80% 90%, rgba(208,161,105,0.04) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.container{
+  max-width:920px;
+  margin:0 auto;
+  padding:0 clamp(1.25rem, 4vw, 2.5rem);
+  position:relative;
+  z-index:1;
+}
+
+/* HERO */
+.hero{
+  padding:clamp(4rem, 12vh, 8rem) 0 clamp(3rem, 8vh, 5rem);
+  text-align:center;
+}
+.hero .tag{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--copper);
+  background:var(--copper-d);
+  border:1px solid var(--bdr-strong);
+  padding:.5rem 1rem;
+  border-radius:100px;
+  margin-bottom:1.75rem;
+}
+.hero h1{
+  font-size:clamp(2.25rem, 6vw, 4rem);
+  font-weight:900;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:1.5rem;
+}
+.hero h1 .accent{color:var(--copper)}
+.hero .sub{
+  font-size:clamp(1.05rem, 1.5vw, 1.25rem);
+  color:var(--t2);
+  max-width:36ch;
+  margin:0 auto;
+  line-height:1.5;
+  font-weight:400;
+}
+
+/* Demo strip — visual representation of word highlighting */
+.demo{
+  margin:3rem auto 0;
+  padding:2rem clamp(1.25rem, 3vw, 2.5rem);
+  background:var(--card);
+  border:1px solid var(--bdr);
+  border-radius:18px;
+  max-width:740px;
+}
+.demo-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;
+  font-weight:500;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--t3);
+  margin-bottom:1rem;
+  text-align:center;
+}
+.demo-text{
+  font-size:clamp(1.25rem, 2.5vw, 1.85rem);
+  font-weight:800;
+  line-height:1.35;
+  letter-spacing:-.01em;
+  text-align:center;
+}
+.demo-text span{transition:color .25s ease}
+.demo-text .spoken{color:var(--t1)}
+.demo-text .current{color:var(--copper)}
+.demo-text .future{color:var(--t3)}
+
+/* SECTION TITLES */
+section{padding:clamp(2.5rem, 5vh, 4rem) 0}
+.lb{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--copper);
+  margin-bottom:1rem;
+  display:block;
+}
+.h2{
+  font-size:clamp(1.6rem, 3vw, 2.2rem);
+  font-weight:800;
+  line-height:1.15;
+  letter-spacing:-.015em;
+  margin-bottom:1.25rem;
+}
+.lede{
+  font-size:1.05rem;
+  color:var(--t2);
+  max-width:62ch;
+  line-height:1.6;
+  margin-bottom:1.5rem;
+}
+
+/* WHY 3-COL */
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.25rem;
+  margin-top:2rem;
+}
+.why-card{
+  background:var(--card);
+  border:1px solid var(--bdr);
+  border-radius:14px;
+  padding:1.5rem;
+  position:relative;
+}
+.why-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:var(--copper);
+  border-radius:14px 14px 0 0;
+  opacity:.5;
+}
+.why-card .n{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:2px;
+  color:var(--copper);
+  margin-bottom:.6rem;
+  display:block;
+}
+.why-card h3{
+  font-size:1.05rem;
+  font-weight:800;
+  margin-bottom:.5rem;
+  letter-spacing:-.005em;
+}
+.why-card p{
+  font-size:.9rem;
+  color:var(--t2);
+  line-height:1.55;
+}
+
+/* SPEC GRID — "what you get" */
+.spec{
+  background:var(--card);
+  border:1px solid var(--bdr);
+  border-radius:16px;
+  padding:clamp(1.5rem, 3vw, 2.5rem);
+  margin-top:1.5rem;
+}
+.spec-row{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:1.5rem;
+  padding:.85rem 0;
+  border-bottom:1px solid var(--bdr);
+  align-items:baseline;
+}
+.spec-row:last-child{border-bottom:none}
+.spec-row .k{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--copper);
+}
+.spec-row .v{
+  font-size:.95rem;
+  color:var(--t1);
+  font-weight:500;
+}
+.spec-row .v small{color:var(--t3);font-size:.8rem;display:block;margin-top:.2rem;font-weight:400}
+
+/* USE-CASE TABLE */
+.uc{
+  margin-top:1.5rem;
+  border:1px solid var(--bdr);
+  border-radius:14px;
+  overflow:hidden;
+}
+.uc-row{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:1.5rem;
+  padding:1.1rem 1.5rem;
+  border-bottom:1px solid var(--bdr);
+  background:var(--card);
+  align-items:baseline;
+}
+.uc-row:last-child{border-bottom:none}
+.uc-row:nth-child(even){background:var(--card2)}
+.uc-row .uc-k{
+  font-weight:700;
+  font-size:.95rem;
+}
+.uc-row .uc-v{
+  color:var(--t2);
+  font-size:.9rem;
+  line-height:1.5;
+}
+
+/* CTA */
+.cta-section{
+  padding:clamp(3rem, 6vh, 5rem) 0 clamp(4rem, 8vh, 6rem);
+  text-align:center;
+}
+.cta-card{
+  background:linear-gradient(180deg, var(--card2) 0%, var(--card) 100%);
+  border:1px solid var(--bdr-strong);
+  border-radius:20px;
+  padding:clamp(2rem, 5vw, 3.5rem);
+  margin-top:2rem;
+}
+.cta-card h3{
+  font-size:clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight:800;
+  letter-spacing:-.01em;
+  margin-bottom:.75rem;
+}
+.cta-card p{
+  color:var(--t2);
+  font-size:1rem;
+  max-width:50ch;
+  margin:0 auto 1.75rem;
+  line-height:1.55;
+}
+.btn-row{
+  display:flex;
+  gap:.75rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  font-family:'Inter',sans-serif;
+  font-weight:700;
+  font-size:.95rem;
+  padding:.85rem 1.5rem;
+  border-radius:100px;
+  text-decoration:none;
+  transition:all .2s;
+  cursor:pointer;
+  border:none;
+}
+.btn-primary{
+  background:var(--copper);
+  color:#000;
+}
+.btn-primary:hover{
+  background:#E0B57E;
+  text-decoration:none;
+  transform:translateY(-1px);
+}
+.btn-ghost{
+  background:transparent;
+  color:var(--t1);
+  border:1px solid var(--bdr-strong);
+}
+.btn-ghost:hover{
+  background:var(--copper-d);
+  border-color:var(--copper);
+  text-decoration:none;
+}
+
+/* PATHS — done-for-you / DIY / hybrid */
+.paths{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.25rem;
+  margin-top:2rem;
+}
+.path-card{
+  background:var(--card);
+  border:1px solid var(--bdr);
+  border-radius:14px;
+  padding:1.75rem 1.5rem;
+}
+.path-card .pl{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.6rem;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--copper);
+  margin-bottom:.5rem;
+}
+.path-card h4{
+  font-size:1.05rem;
+  font-weight:800;
+  margin-bottom:.6rem;
+  letter-spacing:-.005em;
+}
+.path-card p{
+  font-size:.85rem;
+  color:var(--t2);
+  line-height:1.55;
+}
+
+/* FOOTER */
+footer{
+  padding:2rem 0 3.5rem;
+  border-top:1px solid var(--bdr);
+  text-align:center;
+  font-size:.85rem;
+  color:var(--t3);
+  margin-top:2rem;
+}
+footer a{color:var(--copper)}
+
+/* MOBILE */
+@media (max-width:768px){
+  .why-grid,.paths{grid-template-columns:1fr;gap:.85rem}
+  .spec-row,.uc-row{grid-template-columns:1fr;gap:.4rem}
+  .spec-row .v{font-size:.9rem}
+  .uc-row .uc-k{font-size:1rem}
+  .demo-text{font-size:1.2rem}
+  .btn-row{flex-direction:column;align-items:stretch}
+  .btn{justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="wm">reinaldofigueroa.com</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <span class="tag">Short-Form Video Format</span>
+    <h1>Every word lights up <span class="accent">as it's spoken.</span></h1>
+    <p class="sub">Captioned VSLs in 2 to 5 minutes per video. Real-sounding voice. Zero footage required.</p>
+
+    <div class="demo">
+      <div class="demo-label">▸ Live preview</div>
+      <p class="demo-text" id="demoText"></p>
+    </div>
+  </section>
+
+  <!-- WHAT IT IS -->
+  <section>
+    <span class="lb">What it is</span>
+    <h2 class="h2">The script is the video.</h2>
+    <p class="lede">A 30 to 120 second video where the script sits on screen and each word highlights the instant a voice speaks it. Background, font, brand colors, voice, and canvas size are all configurable per client. No footage to source, no timeline to scrub, no editor to hire.</p>
+  </section>
+
+  <!-- WHY IT WORKS -->
+  <section>
+    <span class="lb">Why it works</span>
+    <h2 class="h2">Three reasons most short-form ads die in the first two seconds.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="n">01 / Anchor</span>
+        <h3>Something to read.</h3>
+        <p>Most viewers scroll on mute. Captioned VSL gives them text they can read instantly, even with sound off.</p>
+      </div>
+      <div class="why-card">
+        <span class="n">02 / Polish</span>
+        <h3>Production signal.</h3>
+        <p>Word-by-word highlighting reads as high-effort. No footage required to communicate value.</p>
+      </div>
+      <div class="why-card">
+        <span class="n">03 / Sound-on bonus</span>
+        <h3>Real voice, real lift.</h3>
+        <p>When the viewer turns audio on, a real-sounding voiceover doubles retention versus typical AI voice.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU GET -->
+  <section>
+    <span class="lb">What you get</span>
+    <h2 class="h2">A finished video, every time.</h2>
+    <div class="spec">
+      <div class="spec-row"><div class="k">Format</div><div class="v">MP4, your canvas of choice <small>portrait 1080×1920, square 1080×1080, or landscape 1920×1080</small></div></div>
+      <div class="spec-row"><div class="k">Voice</div><div class="v">Real-sounding AI voiceover <small>stock voice or a clone of your own voice</small></div></div>
+      <div class="spec-row"><div class="k">Captions</div><div class="v">Word-perfect, synced to the audio</div></div>
+      <div class="spec-row"><div class="k">Brand</div><div class="v">Color, font, watermark to match your style</div></div>
+      <div class="spec-row"><div class="k">Turnaround</div><div class="v">2 to 5 minutes per video <small>once the script is approved</small></div></div>
+      <div class="spec-row"><div class="k">Cost</div><div class="v">~30 cents per finished video in API spend</div></div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU PROVIDE -->
+  <section>
+    <span class="lb">What you provide</span>
+    <h2 class="h2">A script. That's it.</h2>
+    <p class="lede">A text file with what you want said. A voice preference if you have one. A brand profile if it exists. No assets, no footage, no design briefs.</p>
+  </section>
+
+  <!-- WHERE IT FITS -->
+  <section>
+    <span class="lb">Where it fits</span>
+    <h2 class="h2">Built for the parts of the funnel where retention matters most.</h2>
+    <div class="uc">
+      <div class="uc-row"><div class="uc-k">Cold ad creative</div><div class="uc-v">High retention even on mute. Best fit for Meta Reels, IG and TikTok feeds.</div></div>
+      <div class="uc-row"><div class="uc-k">Webinar invites</div><div class="uc-v">Builds anticipation and shows the offer at a glance.</div></div>
+      <div class="uc-row"><div class="uc-k">Founder messages</div><div class="uc-v">Production polish without time on camera.</div></div>
+      <div class="uc-row"><div class="uc-k">Testimonial overlay</div><div class="uc-v">Captions sit over an existing video clip.</div></div>
+      <div class="uc-row"><div class="uc-k">Course intros</div><div class="uc-v">Consistent template across your whole library.</div></div>
+    </div>
+  </section>
+
+  <!-- WHAT IT REPLACES -->
+  <section>
+    <span class="lb">What it replaces</span>
+    <h2 class="h2">30 to 60 minutes per video, in Premiere. Now 5 minutes.</h2>
+    <p class="lede">The old way to make a captioned VSL meant manually syncing every word in a video editor. That doesn't scale past one video per day. This setup makes captioned VSL the same way you'd send an email: write the script, pick the voice, hit render.</p>
+  </section>
+
+  <!-- HOW TO GET ONE -->
+  <section>
+    <span class="lb">How to get one</span>
+    <h2 class="h2">Three paths.</h2>
+    <div class="paths">
+      <div class="path-card">
+        <div class="pl">Path 01</div>
+        <h4>Done for you.</h4>
+        <p>Send your script. Get the finished video back. Best for speed.</p>
+      </div>
+      <div class="path-card">
+        <div class="pl">Path 02</div>
+        <h4>Build it yourself.</h4>
+        <p>Full implementation guide on request. About a day of setup with a dev or technical operator.</p>
+      </div>
+      <div class="path-card">
+        <div class="pl">Path 03</div>
+        <h4>Hybrid.</h4>
+        <p>Turnkey setup tuned to your brand, then you run new scripts through it yourself.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-card">
+      <h3>Send the script. Get the first render in under five minutes.</h3>
+      <p>One line of follow-up: your script, voice preference, and brand colors. That's the brief.</p>
+      <div class="btn-row">
+        <a href="mailto:rayfigs@gmail.com?subject=Caption%20VSL%20-%20Send%20me%20a%20render" class="btn btn-primary">Start the brief</a>
+        <a href="https://reinaldofigueroa.com" class="btn btn-ghost">More about Ray</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by <a href="https://reinaldofigueroa.com">Reinaldo Figueroa</a> · Strategic Marketing Consultant</p>
+  </footer>
+
+</div>
+
+<script>
+// Animated demo: word-by-word highlight cycling forever.
+(function(){
+  const text = "Every word lights up as it is spoken. The viewer reads. The viewer stays. The scroll stops here.";
+  const words = text.split(" ");
+  const el = document.getElementById('demoText');
+  el.innerHTML = words.map((w,i)=>`<span class="future" data-i="${i}">${w}</span>`).join(' ');
+  const spans = el.querySelectorAll('span');
+
+  let i = 0;
+  function tick(){
+    spans.forEach((s, idx) => {
+      s.classList.remove('spoken', 'current', 'future');
+      if (idx < i) s.classList.add('spoken');
+      else if (idx === i) s.classList.add('current');
+      else s.classList.add('future');
+    });
+    i++;
+    if (i > words.length + 4) i = 0;
+  }
+  tick();
+  setInterval(tick, 320);
+})();
+</script>
+
+</body>
+</html>
